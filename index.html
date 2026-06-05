@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal | Frank Meltke</title>
+
+    <link rel="canonical" href="https://signal.meltke.com/">
+    <link rel="alternate" href="https://contraco.com/" hreflang="x-default" />
+    <link rel="alternate" href="https://signal.meltke.com/" hreflang="en" />
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-E95SRPTPNX"></script>
     <script>
@@ -13,32 +21,18 @@
         });
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signal | Frank Meltke</title>
+    <!-- Fonts: self-hosted -->
+    <style>
+@font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; src: url('/fonts/cormorant-garamond-v21-latin-regular.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; src: url('/fonts/cormorant-garamond-v21-latin-600.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; src: url('/fonts/cormorant-garamond-v21-latin-italic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; src: url('/fonts/inter-v20-latin-300.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; src: url('/fonts/inter-v20-latin-500.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; src: url('/fonts/inter-v20-latin-600.woff2') format('woff2'); font-display: swap; }
+    </style>
 
-    <link rel="canonical" href="https://signal.meltke.com/">
-    <link rel="alternate" href="https://contraco.com/" hreflang="x-default" />
-    <link rel="alternate" href="https://signal.meltke.com/" hreflang="en" />
-
-    <meta name="robots" content="index, follow">
-    <meta name="description" content="Practitioner notes on AI governance, agent authorization, and engineering judgment. Frank Meltke on the structural challenges of enterprise AI deployment.">
-    <meta name="keywords" content="AI governance, agent authorization, engineering judgment, enterprise AI, verifier gap, Frank Meltke">
-    <meta name="author" content="Frank Meltke">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://signal.meltke.com/">
-    <meta property="og:title" content="Signal | Frank Meltke">
-    <meta property="og:description" content="Practitioner notes on AI governance, agent authorization, and engineering judgment from someone building these systems.">
-    <meta property="og:image" content="https://meltke.com/Frank_Meltke.png">
-    <meta property="og:image:width" content="800">
-    <meta property="og:image:height" content="800">
-
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Signal | Frank Meltke">
-    <meta name="twitter:description" content="Practitioner notes on AI governance, agent authorization, and engineering judgment.">
-    <meta name="twitter:image" content="https://meltke.com/Frank_Meltke.png">
-
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://meltke.com/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="https://meltke.com/favicon.svg">
     <link rel="icon" type="image/png" sizes="16x16" href="https://meltke.com/favicon-16x16.png">
@@ -58,6 +52,27 @@
     <meta name="msapplication-TileImage" content="https://meltke.com/ms-icon-144x144.png">
     <meta name="theme-color" content="#C00000">
 
+    <!-- SEO Meta -->
+    <meta name="description" content="Practitioner notes on AI governance, agent authorization, and engineering judgment. Frank Meltke on the structural challenges of enterprise AI deployment.">
+    <meta name="author" content="Frank Meltke">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Signal | Frank Meltke">
+    <meta property="og:description" content="Practitioner notes on AI governance, agent authorization, and engineering judgment from someone building these systems.">
+    <meta property="og:url" content="https://signal.meltke.com/">
+    <meta property="og:image" content="https://meltke.com/Frank_Meltke.png">
+    <meta property="og:logo" content="https://meltke.com/Logo_rectangle.svg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Signal | Frank Meltke">
+    <meta name="twitter:description" content="Practitioner notes on AI governance, agent authorization, and engineering judgment.">
+    <meta name="twitter:image" content="https://meltke.com/Frank_Meltke.png">
+    <meta name="twitter:site" content="@frankmeltke">
+
+    <!-- Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -98,204 +113,249 @@
     }
     </script>
 
-    <!-- Fonts (self-hosted) -->
-    <style>
-@font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; src: url('/fonts/cormorant-garamond-v21-latin-regular.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; src: url('/fonts/cormorant-garamond-v21-latin-600.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; src: url('/fonts/cormorant-garamond-v21-latin-italic.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; src: url('/fonts/inter-v20-latin-300.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; src: url('/fonts/inter-v20-latin-500.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; src: url('/fonts/inter-v20-latin-600.woff2') format('woff2'); font-display: swap; }
-</style>
-
     <style>
         :root {
             --primary-red: #C00000;
             --deep-charcoal: #404040;
             --warm-white: #F8F6F3;
             --warm-gray-light: #E5E2DD;
-            --warm-gray-medium: #A8A5A0;
-            --warm-gray-dark: #6B6B6B;
+            --warm-gray-medium: #9A9590;
             --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-sans: 'Inter', system-ui, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        html { scroll-behavior: smooth; }
         body {
             font-family: var(--font-sans);
-            font-weight: 400;
-            color: var(--deep-charcoal);
             background: var(--warm-white);
-            line-height: 1.7;
-        }
-
-        .page {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 80px 40px 120px;
-        }
-
-        .site-header {
-            margin-bottom: 80px;
-            padding-bottom: 32px;
-            border-bottom: 2px solid var(--primary-red);
-        }
-
-        .site-name {
-            font-family: var(--font-serif);
-            font-size: 2.8rem;
-            font-weight: 600;
             color: var(--deep-charcoal);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .site-byline {
-            margin-top: 8px;
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: var(--warm-gray-dark);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+        header {
+            padding: 32px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--warm-gray-light);
+            background: var(--warm-white);
         }
 
-        .site-byline a {
-            color: var(--primary-red);
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             text-decoration: none;
-            font-weight: 500;
         }
-
-        .site-byline a:hover {
-            text-decoration: underline;
-        }
-
-        .entry {
-            margin-bottom: 72px;
-        }
-
-        .entry-label {
-            font-size: 0.75rem;
+        .logo-link img { height: 36px; width: auto; }
+        .logo-link.logo-failed img { display: none; }
+        .logo-fallback {
+            display: none;
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
             font-weight: 600;
-            letter-spacing: 0.12em;
+            color: var(--primary-red);
+            letter-spacing: 0.04em;
+        }
+        .logo-link.logo-failed .logo-fallback { display: block; }
+
+        .header-link {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--warm-gray-medium);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .header-link:hover { color: var(--primary-red); }
+
+        main { flex: 1; }
+
+        .hero {
+            padding: 100px 48px 80px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--primary-red);
-            margin-bottom: 12px;
-        }
-
-        .entry h2 {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--deep-charcoal);
-            line-height: 1.2;
             margin-bottom: 24px;
         }
 
-        .entry p {
-            font-size: 1.05rem;
-            color: var(--warm-gray-dark);
-            margin-bottom: 18px;
-            line-height: 1.75;
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--deep-charcoal);
+            margin-bottom: 32px;
         }
 
-        .entry p:last-child {
-            margin-bottom: 0;
-        }
-
-        .divider {
-            border: none;
-            border-top: 1px solid var(--warm-gray-light);
-            margin: 72px 0;
-        }
-
-        .site-footer {
-            padding-top: 48px;
-            border-top: 1px solid var(--warm-gray-light);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            font-size: 0.875rem;
-        }
-
-        .footer-links a {
-            color: var(--warm-gray-dark);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
+        .hero h1 em {
+            font-style: italic;
             color: var(--primary-red);
         }
 
-        .footer-note {
-            margin-top: 16px;
-            font-size: 0.8rem;
-            color: var(--warm-gray-medium);
+        .hero-bio {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--deep-charcoal);
+            max-width: 680px;
+            margin-bottom: 48px;
         }
 
-        @media (max-width: 600px) {
-            .page { padding: 48px 24px 80px; }
-            .site-name { font-size: 2rem; }
-            .entry h2 { font-size: 1.6rem; }
+        .divider {
+            width: 48px;
+            height: 2px;
+            background: var(--primary-red);
+            margin: 0 auto 64px;
+        }
+
+        .section {
+            padding: 0 48px 80px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--warm-gray-medium);
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            color: var(--deep-charcoal);
+        }
+
+        .section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--deep-charcoal);
+            margin-bottom: 16px;
+        }
+
+        footer {
+            padding: 40px 48px;
+            border-top: 1px solid var(--warm-gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copy { font-size: 0.78rem; color: var(--warm-gray-medium); }
+
+        .footer-contraco { font-size: 0.78rem; color: var(--warm-gray-medium); }
+        .footer-contraco a { color: var(--primary-red); text-decoration: none; font-weight: 500; }
+        .footer-contraco a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            header { padding: 24px; }
+            .hero { padding: 60px 24px 48px; }
+            .section { padding: 0 24px 56px; }
+            footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
-<div class="page">
-
-    <header class="site-header">
-        <h1 class="site-name">Signal</h1>
-        <div class="site-byline">Practitioner notes by <a href="https://meltke.com">Frank Meltke</a> &bull; Founder, <a href="https://contraco.net">contraco</a></div>
+    <header>
+        <a href="https://signal.meltke.com/" class="logo-link" id="site-logo">
+            <img src="https://meltke.com/Logo_rectangle.svg"
+                 alt="Frank Meltke"
+                 onerror="this.parentElement.classList.add('logo-failed');">
+            <span class="logo-fallback">Frank Meltke</span>
+        </a>
+        <a href="https://meltke.com/" class="header-link">meltke.com →</a>
     </header>
 
-    <article class="entry">
-        <div class="entry-label">On AI Governance</div>
-        <h2>The Verifier Gap</h2>
-        <p>Working on AI agent authorization systems has taught me something that is not yet widely understood: the problem of AI trustworthiness is structural, not technical. The next model version will not resolve it. Larger training datasets will not resolve it. The issue is that in unbounded domains, there is no compiler.</p>
-        <p>In software, the compiler is a brutal, cheap, automatic corrective mechanism. It catches errors before they reach production. AI has no equivalent. In architecture, integration, and governance decisions, errors made by AI remain invisible until they become expensive. Sometimes catastrophically so.</p>
-        <p>I call this the verifier gap. It is the absence of a verification layer that catches errors before they compound through a system that has already been deployed, already been trusted, and already been given access to data and decisions that matter.</p>
-        <p>What fills the verifier gap? In every enterprise AI deployment I have worked on, the answer is the same: engineering judgment. Not a tool. Not a framework. Human judgment, applied at the critical junctions where AI generates outputs that will be acted upon without further review. This is not a temporary situation while the models improve. It is a permanent feature of unbounded domains. And the organizations that understand this first will build systems that hold together under pressure. The ones that do not will discover the gap at the worst possible moment.</p>
-    </article>
+    <main>
 
-    <hr class="divider">
+        <section class="hero">
+            <p class="eyebrow">Practitioner Notes</p>
+            <h1>Signal<br><em>AI Governance.<br>Agent Authorization.<br>Engineering Judgment.</em></h1>
+            <p class="hero-bio">
+                Notes from the field by <a href="https://meltke.com/" style="color:var(--primary-red);text-decoration:none;font-weight:500;">Frank Meltke</a>, founder and CEO of <a href="https://contraco.net/" style="color:var(--primary-red);text-decoration:none;font-weight:500;">contraco</a>. Written while actively building AI agent authorization systems and enterprise AI governance frameworks.
+            </p>
+        </section>
 
-    <article class="entry">
-        <div class="entry-label">On Agent Authorization</div>
-        <h2>What Agent Authorization Actually Requires</h2>
-        <p>The financial services industry is currently building authorization frameworks for AI agents. The regulatory requirements are tightening. The frameworks are more complex than they appear from the outside.</p>
-        <p>An agent is not just a user. An agent can act on behalf of a user, spawn sub-agents, chain authorizations, and execute transactions at speeds that make human oversight a fiction if the architecture is not designed carefully from the start. The naive approach treats agents like users with special permissions. The naive approach fails because it does not account for scope drift, revocation propagation, liability chains between agent hierarchies, or the audit trail requirements that regulators will enforce retroactively.</p>
-        <p>What authorization actually requires: explicit scope binding at the moment of consent creation, time-bounded permissions with automatic expiration, revocation logic that propagates synchronously through agent chains rather than asynchronously, and an audit log that can reconstruct the exact authorization state for every decision the system ever made. None of this is technically hard in isolation. All of it requires engineering judgment about what matters before the system exists. After the system exists, the judgment has already been made. The only question is whether it was made deliberately or by accident.</p>
-        <p>The difference between deliberate and accidental authorization architecture is not visible when things work. It is only visible when something goes wrong, when a regulator asks for evidence, or when an agent acts on a permission that should have been revoked three steps earlier in a chain that nobody drew on paper. </p>
-    </article>
+        <div class="divider"></div>
 
-    <hr class="divider">
+        <section class="section">
+            <p class="section-label">On AI Governance</p>
+            <h2>The Verifier Gap</h2>
+            <p>Working on AI agent authorization systems has taught me something that is not yet widely understood: the problem of AI trustworthiness is structural, not technical. The next model version will not resolve it. Larger training datasets will not resolve it. The issue is that in unbounded domains, there is no compiler.</p>
+            <p>In software, the compiler is a brutal, cheap, automatic corrective mechanism. It catches errors before they reach production. AI has no equivalent. In architecture, integration, and governance decisions, errors made by AI remain invisible until they become expensive. Sometimes catastrophically so.</p>
+            <p>I call this the verifier gap. It is the absence of a verification layer that catches errors before they compound through a system that has already been deployed, already been trusted, and already been given access to data and decisions that matter.</p>
+            <p>What fills the verifier gap? In every enterprise AI deployment I have worked on, the answer is the same: engineering judgment. Not a tool. Not a framework. Human judgment, applied at the critical junctions where AI generates outputs that will be acted upon without further review. This is not a temporary situation while the models improve. It is a permanent feature of unbounded domains. And the organizations that understand this first will build systems that hold together under pressure. The ones that do not will discover the gap at the worst possible moment.</p>
+        </section>
 
-    <article class="entry">
-        <div class="entry-label">On Engineering Judgment</div>
-        <h2>Engineering Judgment Is the New Compiler</h2>
-        <p>Code is now abundant. AI generates it at volumes and speeds that would have been unthinkable two years ago. This is not a threat to engineering. It is a redefinition of what engineering means.</p>
-        <p>The bottleneck has shifted. When code was scarce, the question was: can we build this? When code is abundant, the question becomes: should we build this, and if so, how do we build it in a way that will not collapse under the weight of the next change request?</p>
-        <p>That second question requires judgment that no model can supply. It requires understanding the organizational context in which the system will operate. It requires knowing which requirements are real and which are negotiable. It requires anticipating how the system will fail, not just how it will succeed. It requires someone who takes responsibility for the answer.</p>
-        <p>This is not a soft skill. It is the hardest technical skill in enterprise AI deployment, and it is becoming scarcer as the supply of generated code increases faster than the supply of people who understand what the code is supposed to do, why it was written that way, and what will happen when the organization it serves changes direction.</p>
-        <p>I have been building enterprise systems since 1998. The tools have changed beyond recognition. The underlying challenge has not. Technology moves faster than organizations. The gap between what a system can do and what an organization can absorb is where most transformation projects fail. Closing that gap requires human judgment. It has always required human judgment. AI has made that judgment rarer, not more common. That is the central fact of enterprise AI in 2026.</p>
-    </article>
+        <div class="divider"></div>
 
-    <footer class="site-footer">
-        <div class="footer-links">
-            <a href="https://meltke.com">Frank Meltke</a>
-            <a href="https://contraco.net">contraco</a>
-            <a href="https://agentic.contraco.net">Agentic Commerce</a>
-            <a href="https://www.linkedin.com/in/frankmeltke" rel="noopener">LinkedIn</a>
-        </div>
-        <p class="footer-note">&copy; 2026 Frank Meltke. Notes from the field.</p>
+        <section class="section">
+            <p class="section-label">On Agent Authorization</p>
+            <h2>What Agent Authorization Actually Requires</h2>
+            <p>The financial services industry is currently building authorization frameworks for AI agents. The regulatory requirements are tightening. The frameworks are more complex than they appear from the outside.</p>
+            <p>An agent is not just a user. An agent can act on behalf of a user, spawn sub-agents, chain authorizations, and execute transactions at speeds that make human oversight a fiction if the architecture is not designed carefully from the start. The naive approach treats agents like users with special permissions. The naive approach fails because it does not account for scope drift, revocation propagation, liability chains between agent hierarchies, or the audit trail requirements that regulators will enforce retroactively.</p>
+            <p>What authorization actually requires: explicit scope binding at the moment of consent creation, time-bounded permissions with automatic expiration, revocation logic that propagates synchronously through agent chains rather than asynchronously, and an audit log that can reconstruct the exact authorization state for every decision the system ever made. None of this is technically hard in isolation. All of it requires engineering judgment about what matters before the system exists. After the system exists, the judgment has already been made. The only question is whether it was made deliberately or by accident.</p>
+            <p>The difference between deliberate and accidental authorization architecture is not visible when things work. It is only visible when something goes wrong, when a regulator asks for evidence, or when an agent acts on a permission that should have been revoked three steps earlier in a chain that nobody drew on paper.</p>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="section">
+            <p class="section-label">On Engineering Judgment</p>
+            <h2>Engineering Judgment Is the New Compiler</h2>
+            <p>Code is now abundant. AI generates it at volumes and speeds that would have been unthinkable two years ago. This is not a threat to engineering. It is a redefinition of what engineering means.</p>
+            <p>The bottleneck has shifted. When code was scarce, the question was: can we build this? When code is abundant, the question becomes: should we build this, and if so, how do we build it in a way that will not collapse under the weight of the next change request?</p>
+            <p>That second question requires judgment that no model can supply. It requires understanding the organizational context in which the system will operate. It requires knowing which requirements are real and which are negotiable. It requires anticipating how the system will fail, not just how it will succeed. It requires someone who takes responsibility for the answer.</p>
+            <p>This is not a soft skill. It is the hardest technical skill in enterprise AI deployment, and it is becoming scarcer as the supply of generated code increases faster than the supply of people who understand what the code is supposed to do, why it was written that way, and what will happen when the organization it serves changes direction.</p>
+            <p>I have been building enterprise systems since 1998. The tools have changed beyond recognition. The underlying challenge has not. Technology moves faster than organizations. The gap between what a system can do and what an organization can absorb is where most transformation projects fail. Closing that gap requires human judgment. It has always required human judgment. AI has made that judgment rarer, not more common. That is the central fact of enterprise AI in 2026.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p class="footer-copy">&copy; 2026 Frank Meltke. Notes from the field.</p>
+        <p class="footer-contraco"><a href="https://meltke.com/">Frank Meltke</a> &bull; Founder &amp; CEO at <a href="https://contraco.net/">contraco</a> &bull; <a href="https://agentic.contraco.net/">Agentic Commerce</a></p>
     </footer>
 
-</div>
+    <script>
+        (function() {
+            const logo = document.getElementById('site-logo');
+            const logoImg = logo.querySelector('img');
+            let retryCount = 0;
+            function handleLogoError() {
+                if (retryCount < 2) {
+                    retryCount++;
+                    setTimeout(function() { logoImg.src = 'https://meltke.com/Logo_rectangle.svg'; }, 1000 * retryCount);
+                } else {
+                    logo.classList.add('logo-failed');
+                }
+            }
+            if (logoImg.complete && logoImg.naturalHeight === 0) { handleLogoError(); }
+            logoImg.addEventListener('error', handleLogoError);
+            logoImg.addEventListener('load', function() { logo.classList.remove('logo-failed'); });
+        })();
+    </script>
 
 <script>
   window.goatcounter = { path: function(p) { return location.host + p } }

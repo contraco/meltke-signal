@@ -1,0 +1,36 @@
+# Robots.txt for signal.meltke.com
+
+User-agent: *
+Allow: /
+Disallow: /.git/
+
+# AI answer engines — ALLOWED
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# AI training scrapers — BLOCKED
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: https://signal.meltke.com/sitemap.xml

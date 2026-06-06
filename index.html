@@ -49,7 +49,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="https://signal.meltke.com/apple-touch-icon-180x180.png">
     <link rel="apple-touch-icon" href="https://signal.meltke.com/apple-touch-icon.png">
     <meta name="msapplication-TileColor" content="#C00000">
-    <meta name="msapplication-TileImage" content="https://meltke.com/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="https://signal.meltke.com/ms-icon-144x144.png">
     <meta name="theme-color" content="#C00000">
 
     <!-- SEO Meta -->
@@ -329,6 +329,18 @@
             <p>That second question requires judgment that no model can supply. It requires understanding the organizational context in which the system will operate. It requires knowing which requirements are real and which are negotiable. It requires anticipating how the system will fail, not just how it will succeed. It requires someone who takes responsibility for the answer.</p>
             <p>This is not a soft skill. It is the hardest technical skill in enterprise AI deployment, and it is becoming scarcer as the supply of generated code increases faster than the supply of people who understand what the code is supposed to do, why it was written that way, and what will happen when the organization it serves changes direction.</p>
             <p>I have been building enterprise systems since 1998. The tools have changed beyond recognition. The underlying challenge has not. Technology moves faster than organizations. The gap between what a system can do and what an organization can absorb is where most transformation projects fail. Closing that gap requires human judgment. It has always required human judgment. AI has made that judgment rarer, not more common. That is the central fact of enterprise AI in 2026.</p>
+
+        <div class="divider"></div>
+
+        <section class="section">
+            <p class="section-label">Field Note &middot; June 2026</p>
+            <h2>Gopuff Go and the Authorization Question Nobody Asked</h2>
+            <p>On June 3, 2026, Gopuff and xAI launched Go, a Grok-powered shopping agent that builds your cart the moment you open the app. It runs against 13 years of Gopuff order history, real-time signals from X, and live inventory across 400 micro-fulfillment centers. For returning customers, the agent completes the transaction with a single tap.</p>
+            <p>This is not a product recommendation engine. This is an agent making purchasing decisions on your behalf, autonomously, before you have expressed any intent in the current session.</p>
+            <p>The press coverage focused on the experience: the TikTok-style contextual scenes, the hands-free voice checkout, the prediction accuracy. Gopuff co-founder Yakir Gola described it directly: the greatest friction in commerce is no longer delivery. It is the moment before. The thinking, the deciding, the remembering. Go removes that friction at scale.</p>
+            <p>Almost nobody asked the architecture question. Who authorized the agent to build that specific cart? What is the scope boundary? What happens when the prediction is wrong and the transaction has already executed? What is the revocation mechanism? If the user disputes the charge, what does the audit trail look like? Is the authorization model session-bound or persistent? What stops the agent from acting during a session the user did not intend to be a shopping session?</p>
+            <p>Gopuff's press release notes that xAI is configured to prevent Grok from training on individual customer data while still using order history for real-time personalization. That is a privacy statement. It is not an authorization architecture.</p>
+            <p>When friction is removed, the authorization architecture must carry the entire load. Every decision the agent makes that would previously have required a conscious human choice now requires the system to have already made that choice correctly, with the user's genuine prior consent, within a scope the user actually understood, backed by an audit trail that would hold up to scrutiny. That is not a product feature. It is a governance problem. And it is already live in the Gopuff app.</p>
         </section>
 
     </main>

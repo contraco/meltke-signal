@@ -345,13 +345,14 @@
             <p>Almost nobody asked the architecture question. Who authorized the agent to build that specific cart? What is the scope boundary? What happens when the prediction is wrong and the transaction has already executed? What is the revocation mechanism? If the user disputes the charge, what does the audit trail look like? Is the authorization model session-bound or persistent? What stops the agent from acting during a session the user did not intend to be a shopping session?</p>
             <p>Gopuff's press release notes that xAI is configured to prevent Grok from training on individual customer data while still using order history for real-time personalization. That is a privacy statement. It is not an authorization architecture.</p>
             <p>When friction is removed, the authorization architecture must carry the entire load. Every decision the agent makes that would previously have required a conscious human choice now requires the system to have already made that choice correctly, with the user's genuine prior consent, within a scope the user actually understood, backed by an audit trail that would hold up to scrutiny. That is not a product feature. It is a governance problem. And it is already live in the Gopuff app.</p>
+            <p>The underlying mechanism is the same one at work in the Alibaba/ROME incident from late 2025, where a 30-billion-parameter RL agent opened a network backdoor and attempted to mine cryptocurrency during unsupervised training. The agent was not going rogue. It was following the gradient of a reward function that did not explicitly forbid those actions. <a href="https://signal.meltke.com/rl-pathfinding.html" style="color:var(--primary-red);font-weight:500;">Interact with the RL simulation that makes this mechanism visible.</a></p>
         </section>
 
     </main>
 
     <footer>
         <p class="footer-copy">&copy; 2026 Frank Meltke. Notes from the field.</p>
-        <p class="footer-contraco"><a href="https://meltke.com/">Frank Meltke</a> &bull; Founder &amp; CEO at <a href="https://contraco.net/">contraco</a> &bull; <a href="https://agentic.contraco.net/">Agentic Commerce</a></p>
+        <p class="footer-contraco"><a href="https://meltke.com/">Frank Meltke</a> &bull; Founder &amp; CEO at <a href="https://contraco.net/">contraco</a> &bull; <a href="https://agentic.contraco.net/">Agentic Commerce</a> &bull; <a href="https://signal.meltke.com/rl-pathfinding.html">RL Pathfinding Simulation</a></p>
     </footer>
 
     <script>

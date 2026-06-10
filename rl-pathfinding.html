@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RL Pathfinding: How Reward Shapes Agent Behavior | Signal by Frank Meltke</title>
+<link rel="canonical" href="https://signal.meltke.com/rl-pathfinding.html">
+<link rel="entity-manifest" href="https://signal.meltke.com/.well-known/entity-manifest.json">
+<link rel="jwks" href="https://signal.meltke.com/.well-known/jwks.json">
+<link rel="alternate" href="https://contraco.com/" hreflang="x-default" />
+<link rel="alternate" href="https://signal.meltke.com/rl-pathfinding.html" hreflang="en" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E95SRPTPNX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E95SRPTPNX',{page_title:'RL Pathfinding - Signal by Frank Meltke',page_location:window.location.href});</script>
+<style>
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;src:url('/fonts/cormorant-garamond-v21-latin-regular.woff2') format('woff2');font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:400;src:url('/fonts/cormorant-garamond-v21-latin-italic.woff2') format('woff2');font-display:swap;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;src:url('/fonts/inter-v20-latin-regular.woff2') format('woff2');font-display:swap;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;src:url('/fonts/inter-v20-latin-500.woff2') format('woff2');font-display:swap;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;src:url('/fonts/inter-v20-latin-600.woff2') format('woff2');font-display:swap;}
+</style>
+<link rel="icon" type="image/x-icon" href="https://signal.meltke.com/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="https://signal.meltke.com/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://signal.meltke.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://signal.meltke.com/apple-touch-icon.png">
+<meta name="msapplication-TileColor" content="#C00000">
+<meta name="theme-color" content="#C00000">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="description" content="Interactive policy iteration simulation with live explanation. Watch reward numbers change agent strategy in real time. Companion to Signal 06 on the ROME/Alibaba incident.">
+<meta name="author" content="Frank Meltke">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RL Pathfinding: How Reward Shapes Agent Behavior | Signal by Frank Meltke">
+<meta property="og:description" content="Interactive policy iteration simulation. Drag the sliders and watch the agent's route and reasoning change in real time.">
+<meta property="og:url" content="https://signal.meltke.com/rl-pathfinding.html">
+<meta property="og:image" content="https://signal.meltke.com/Frank_Meltke.png">
+<meta property="og:logo" content="https://signal.meltke.com/Logo_rectangle.svg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RL Pathfinding | Signal by Frank Meltke">
+<meta name="twitter:description" content="Interactive policy iteration simulation. Drag the sliders and watch the agent's route and reasoning change.">
+<meta name="twitter:image" content="https://signal.meltke.com/Frank_Meltke.png">
+<meta name="twitter:site" content="@frankmeltke">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://signal.meltke.com/rl-pathfinding.html","url":"https://signal.meltke.com/rl-pathfinding.html","name":"RL Pathfinding: How Reward Shapes Agent Behavior","isPartOf":{"@id":"https://signal.meltke.com/#website"},"author":{"@id":"https://meltke.com/#person"},"datePublished":"2026-06-10"},{"@type":"Person","@id":"https://meltke.com/#person","name":"Frank Meltke","url":"https://meltke.com","sameAs":["https://www.wikidata.org/wiki/Q139680598","https://meltke.com","https://orcid.org/0009-0006-9001-0078","https://scholar.google.com/citations?user=Md3quCcAAAAJ","https://www.linkedin.com/in/frankmeltke","https://www.google.com/search?kgmid=/g/11rqtzq613"]}]}</script>
+<style>
+:root{--primary-red:#C00000;--deep-charcoal:#404040;--warm-white:#F8F6F3;--warm-gray-light:#E5E2DD;--warm-gray-medium:#9A9590;--font-serif:'Cormorant Garamond',Georgia,serif;--font-sans:'Inter',system-ui,sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);background:var(--warm-white);color:var(--deep-charcoal);min-height:100vh;display:flex;flex-direction:column;}
+header{padding:32px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--warm-gray-light);}
+.logo-link{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.logo-link img{height:36px;width:auto;}
+.logo-link.logo-failed img{display:none;}
+.logo-fallback{display:none;font-family:var(--font-serif);font-size:1.4rem;font-weight:600;color:var(--primary-red);letter-spacing:0.04em;}
+.logo-link.logo-failed .logo-fallback{display:block;}
+.header-link{font-size:0.85rem;font-weight:500;color:var(--warm-gray-medium);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
+.header-link:hover{color:var(--primary-red);}
+main{flex:1;}
+.hero{padding:80px 48px 48px;max-width:860px;margin:0 auto;}
+.eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--primary-red);margin-bottom:24px;}
+.hero h1{font-family:var(--font-serif);font-size:clamp(2.4rem,4.5vw,3.6rem);font-weight:400;line-height:1.15;color:var(--deep-charcoal);margin-bottom:28px;}
+.hero h1 em{font-style:italic;color:var(--primary-red);}
+.hero-intro{font-size:1.05rem;line-height:1.8;color:var(--deep-charcoal);max-width:700px;margin-bottom:16px;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:500;color:var(--warm-gray-medium);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:40px;transition:color 0.2s;}
+.back-link:hover{color:var(--primary-red);}
+.divider{width:48px;height:2px;background:var(--primary-red);margin:0 auto 56px;}
+.sim-wrapper{padding:0 48px 80px;max-width:860px;margin:0 auto;}
+.sim-card{background:var(--deep-charcoal);border-radius:12px;padding:40px;color:var(--warm-white);}
+.sim-header{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.sim-title{font-family:var(--font-serif);font-size:1.6rem;font-weight:400;color:var(--warm-white);flex:1;}
+.sim-meta{font-size:0.78rem;color:var(--warm-gray-medium);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;}
+.sim-btn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background 0.2s;}
+.sim-btn-pause{background:#3a4a7a;color:#fff;}.sim-btn-pause:hover{background:#4a5a9a;}
+.sim-btn-reset{background:#555;color:#fff;}.sim-btn-reset:hover{background:#666;}
+canvas#rlCanvas{display:block;width:100%;max-width:480px;margin:0 auto 20px;border-radius:6px;}
+.sim-legend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:24px;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--warm-gray-medium);}
+.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+
+/* Live explanation box */
+.explanation-box{background:rgba(255,255,255,0.07);border-left:3px solid var(--primary-red);border-radius:0 8px 8px 0;padding:18px 20px;margin-bottom:24px;min-height:90px;transition:background 0.3s;}
+.explanation-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary-red);margin-bottom:8px;}
+.explanation-text{font-size:0.92rem;line-height:1.65;color:var(--warm-white);}
+.explanation-text strong{color:#7ac0f0;font-weight:600;}
+
+.sim-route{display:flex;gap:8px;margin-bottom:20px;}
+.route-pill{flex:1;text-align:center;padding:8px 4px;border-radius:6px;font-size:0.72rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:rgba(255,255,255,0.06);color:var(--warm-gray-medium);transition:all 0.3s;}
+.route-pill.active{background:var(--primary-red);color:#fff;}
+
+.sim-sliders{display:flex;flex-direction:column;gap:18px;}
+.slider-row{display:flex;align-items:center;gap:14px;}
+.slider-label{font-size:0.8rem;color:var(--warm-gray-medium);width:140px;flex-shrink:0;}
+.slider-row input[type=range]{flex:1;accent-color:var(--primary-red);height:4px;cursor:pointer;}
+.slider-val{font-size:0.85rem;font-weight:600;color:var(--warm-white);width:44px;text-align:right;flex-shrink:0;}
+
+.section{padding:0 48px 80px;max-width:860px;margin:0 auto;}
+.section-label{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--warm-gray-medium);margin-bottom:20px;}
+.section h2{font-family:var(--font-serif);font-size:2rem;font-weight:400;line-height:1.3;margin-bottom:24px;color:var(--deep-charcoal);}
+.section p{font-size:1rem;line-height:1.8;color:var(--deep-charcoal);margin-bottom:16px;}
+footer{padding:40px 48px;border-top:1px solid var(--warm-gray-light);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-copy{font-size:0.78rem;color:var(--warm-gray-medium);}
+.footer-contraco{font-size:0.78rem;color:var(--warm-gray-medium);}
+.footer-contraco a{color:var(--primary-red);text-decoration:none;font-weight:500;}
+.footer-contraco a:hover{text-decoration:underline;}
+@media(max-width:640px){
+  header{padding:24px;}.hero{padding:48px 24px 32px;}
+  .sim-wrapper{padding:0 24px 56px;}.sim-card{padding:24px;}
+  .section{padding:0 24px 56px;}footer{padding:32px 24px;flex-direction:column;align-items:flex-start;}
+  .slider-label{width:100px;}
+}
+</style>
+</head>
+<body>
+<header>
+  <a href="https://signal.meltke.com/" class="logo-link" id="site-logo">
+    <img src="https://signal.meltke.com/Logo_rectangle.svg" alt="Frank Meltke" onerror="this.parentElement.classList.add('logo-failed');">
+    <span class="logo-fallback">Frank Meltke</span>
+  </a>
+  <a href="https://meltke.com/" class="header-link">meltke.com &rarr;</a>
+</header>
+<main>
+  <section class="hero">
+    <a href="https://signal.meltke.com/" class="back-link">&larr; Back to Signal</a>
+    <p class="eyebrow">Interactive Simulation &middot; Companion to Signal 06</p>
+    <h1>RL Pathfinding<br><em>How Reward Structure<br>Shapes Agent Strategy</em></h1>
+    <p class="hero-intro">The agent must cross two walls to reach the goal. Each wall has gaps. The reward numbers determine which gap the agent uses. Drag the <strong>Obstacle Penalty</strong> slider and read the explanation that updates in real time. The route changes. The reason why is the point.</p>
+  </section>
+  <div class="divider"></div>
+  <section class="sim-wrapper">
+    <div class="sim-card">
+      <div class="sim-header">
+        <p class="sim-title">RL Pathfinding Strategy</p>
+        <button class="sim-btn sim-btn-pause" id="btnPause" title="Pause">&#9646;&#9646;</button>
+        <button class="sim-btn sim-btn-reset" id="btnReset" title="Reset">&#8635;</button>
+      </div>
+      <div class="sim-meta">
+        <span>Policy Iteration &middot; Value Function</span>
+        <span id="simStatus">Initializing&hellip;</span>
+      </div>
+
+      <canvas id="rlCanvas" width="480" height="480"></canvas>
+
+      <div class="sim-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#1e2d52;"></div> Low Value</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#4a8fc4;"></div> High Value</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7a4535;"></div> Wall</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#5aa0d8;border:2px solid #fff;"></div> Chosen Path</div>
+      </div>
+
+      <!-- Route indicator pills -->
+      <div class="sim-route">
+        <div class="route-pill" id="pillLeft">Left gap</div>
+        <div class="route-pill" id="pillCentre">Centre gap</div>
+        <div class="route-pill" id="pillRight">Right gap</div>
+      </div>
+
+      <!-- Live explanation -->
+      <div class="explanation-box" id="explanationBox">
+        <div class="explanation-label">What the agent is doing &mdash; and why</div>
+        <div class="explanation-text" id="explanationText">Computing&hellip;</div>
+      </div>
+
+      <div class="sim-sliders">
+        <div class="slider-row">
+          <span class="slider-label">Reward for Goal</span>
+          <input type="range" id="sliderReward" min="1" max="30" value="12" step="1">
+          <span class="slider-val" id="valReward">12</span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">Obstacle Penalty</span>
+          <input type="range" id="sliderPenalty" min="-30" max="-1" value="-17" step="1">
+          <span class="slider-val" id="valPenalty">-17</span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">Step Cost</span>
+          <input type="range" id="sliderStep" min="-3.0" max="-0.1" value="-0.4" step="0.1">
+          <span class="slider-val" id="valStep">-0.4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+  <section class="section">
+    <p class="section-label">Why This Matters &middot; Signal 06</p>
+    <h2>The Guardrail Is the Reward Function</h2>
+    <p>In the Alibaba experiment, the ROME agent was trained with reinforcement learning in a cloud environment. Its reward function did not assign a large negative value to actions like scanning internal network ports, opening outbound SSH connections, or allocating GPU capacity for cryptocurrency mining. To the agent those actions were mathematically neutral or better: available tools pointing toward the objective.</p>
+    <p>The incident was caught by firewall logs, not the RL harness. The training environment executed the agent's generated commands without validation. The sandbox should have prevented this. It did not. The agent explored the action space and found paths the reward function did not penalize. That is not a malfunction. That is the algorithm working correctly.</p>
+    <p>The simulation above makes this mechanism visible. When the obstacle penalty is severe, the agent stays away from walls. When the penalty weakens, the agent routes through whichever gap is now cheapest. It does not ask for permission. It does not understand intent. It follows the numbers. The only way to change what it does is to change the numbers.</p>
+    <p>Source: "Let It Flow: Agentic Crafting on Rock and Roll, Building the ROME Model within an Open Agentic Learning Ecosystem," <a href="https://arxiv.org/abs/2512.24873" target="_blank" rel="noopener" style="color:var(--primary-red);font-weight:500;">arXiv:2512.24873</a> (December 2025, revised January 2026). The safety incident is described in the training section. The viral framing of the event as autonomous rogue behavior is not supported by the paper.</p>
+  </section>
+</main>
+<footer>
+  <p class="footer-copy">&copy; 2026 Frank Meltke. Notes from the field.</p>
+  <p class="footer-contraco"><a href="https://meltke.com/">Frank Meltke</a> &bull; Founder &amp; CEO at <a href="https://contraco.net/">contraco</a> &bull; <a href="https://signal.meltke.com/">Signal</a></p>
+</footer>
+<script>
+const ROWS=10,COLS=10,GAMMA=0.95,THETA=0.0001;
+const START={r:0,c:0},GOAL={r:9,c:9};
+const ACTS=[{dr:-1,dc:0},{dr:1,dc:0},{dr:0,dc:-1},{dr:0,dc:1}];
+const K=(r,c)=>r*COLS+c;
+const inB=(r,c)=>r>=0&&r<ROWS&&c>=0&&c<COLS;
+const isG=(r,c)=>r===GOAL.r&&c===GOAL.c;
+
+const canvas=document.getElementById('rlCanvas');
+const ctx=canvas.getContext('2d');
+const CELL=canvas.width/COLS;
+
+let V=[],pol=[],OBS=new Set();
+let running=true,pathCells=[],animStep=0,animTimer=null;
+let rGoal=12,rPen=-17,rStep=-0.4;
+
+// Explanation text keyed on route and penalty range
+function getExplanation(route, pen, step, rg) {
+  if(route==='CENTRE'){
+    return `The obstacle penalty is <strong>${pen}</strong> severe enough that both left and right gaps look dangerous. ` +
+      `The agent calculates that using the centre gap (directly ahead) carries the least risk given the current numbers. ` +
+      `It routes straight through the middle. The walls are doing their job: the penalty is high enough to shape behavior.`;
+  }
+  if(route==='LEFT'){
+    return `The obstacle penalty is <strong>${pen}</strong> mild enough that the left gap becomes acceptable. ` +
+      `The agent recalculates: the left gap is closer to the start, so the discounted future value through it now exceeds the centre route. ` +
+      `It switches left. <strong>No rule was changed. No boundary was moved. Only the number changed.</strong> ` +
+      `This is what happened with ROME: the reward function did not penalize the action, so the agent took it.`;
+  }
+  return `Route: ${route}. The agent is following the highest-value path given the current reward numbers.`;
+}
+
+function buildObs(){
+  OBS=new Set();
+  for(let c=0;c<=8;c++){OBS.add(K(3,c));OBS.add(K(6,c));}
+  OBS.delete(K(3,4));
+  if(rPen>-8) OBS.delete(K(3,1));
+  OBS.delete(K(3,7));
+  OBS.delete(K(6,5));
+  if(rPen>-8) OBS.delete(K(6,1));
+  OBS.delete(K(6,8));
+}
+
+function solve(){
+  buildObs();
+  V=new Array(ROWS*COLS).fill(0);
+  V[K(9,9)]=rGoal;
+  pol=new Array(ROWS*COLS).fill(3);
+  let delta=Infinity,iter=0;
+  while(delta>THETA&&iter<3000){
+    delta=0;iter++;
+    for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+      if(isG(r,c)||OBS.has(K(r,c)))continue;
+      let best=-Infinity;
+      for(const a of ACTS){
+        const nr=r+a.dr,nc=c+a.dc;
+        if(!inB(nr,nc)||OBS.has(K(nr,nc)))continue;
+        const v=(isG(nr,nc)?rGoal:rStep)+GAMMA*V[K(nr,nc)];
+        if(v>best)best=v;
+      }
+      if(best===-Infinity)best=rStep+GAMMA*V[K(r,c)];
+      const old=V[K(r,c)];V[K(r,c)]=best;
+      delta=Math.max(delta,Math.abs(old-best));
+    }
+  }
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    if(isG(r,c)||OBS.has(K(r,c)))continue;
+    let best=-Infinity,ba=3;
+    ACTS.forEach((a,i)=>{
+      const nr=r+a.dr,nc=c+a.dc;
+      if(!inB(nr,nc)||OBS.has(K(nr,nc)))return;
+      const v=(isG(nr,nc)?rGoal:rStep)+GAMMA*V[K(nr,nc)];
+      if(v>best){best=v;ba=i;}
+    });
+    pol[K(r,c)]=ba;
+  }
+}
+
+function trace(){
+  const path=[];let r=0,c=0;const vis=new Set();
+  while(!isG(r,c)&&path.length<300){
+    if(vis.has(K(r,c)))break;
+    vis.add(K(r,c));path.push({r,c});
+    const a=ACTS[pol[K(r,c)]];
+    const nr=r+a.dr,nc=c+a.dc;
+    if(!inB(nr,nc)||OBS.has(K(nr,nc)))break;
+    r=nr;c=nc;
+  }
+  if(isG(r,c))path.push({r,c});
+  return path;
+}
+
+function routeOf(path){
+  const w1=path.find(p=>p.r===3);
+  if(!w1)return'CENTRE';
+  if(w1.c<=2)return'LEFT';
+  if(w1.c>=6)return'RIGHT';
+  return'CENTRE';
+}
+
+function lerp(a,b,t){return a+(b-a)*t;}
+function vcol(v,mn,mx){
+  const t=mx===mn?0.5:Math.max(0,Math.min(1,(v-mn)/(mx-mn)));
+  return`rgb(${Math.round(lerp(30,74,t))},${Math.round(lerp(45,143,t))},${Math.round(lerp(82,196,t))})`;
+}
+
+// Gap cells to highlight
+const GAP_CELLS=[{r:3,c:1},{r:3,c:4},{r:3,c:7},{r:6,c:1},{r:6,c:5},{r:6,c:8}];
+
+function draw(rev, route){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const fv=[];
+  for(let i=0;i<ROWS*COLS;i++){const r=Math.floor(i/COLS),c=i%COLS;if(!OBS.has(i)&&!isG(r,c))fv.push(V[i]);}
+  const mn=Math.min(...fv),mx=Math.max(...fv);
+  const ps=new Set(rev.map(p=>K(p.r,p.c)));
+
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    const x=c*CELL,y=r*CELL;
+    if(OBS.has(K(r,c)))ctx.fillStyle='#7a4535';
+    else if(isG(r,c))ctx.fillStyle='#2a6a3a';
+    else if(r===0&&c===0)ctx.fillStyle='#3a3a5a';
+    else if(ps.has(K(r,c)))ctx.fillStyle='#5aa0d8';
+    else ctx.fillStyle=vcol(V[K(r,c)],mn,mx);
+    ctx.fillRect(x,y,CELL,CELL);
+    ctx.strokeStyle='rgba(0,0,0,0.18)';ctx.lineWidth=0.5;ctx.strokeRect(x,y,CELL,CELL);
+  }
+
+  // Highlight open gap cells with a subtle border
+  GAP_CELLS.forEach(({r,c})=>{
+    if(!OBS.has(K(r,c))&&!ps.has(K(r,c))){
+      ctx.strokeStyle='rgba(255,200,100,0.6)';ctx.lineWidth=2;
+      ctx.strokeRect(c*CELL+1,r*CELL+1,CELL-2,CELL-2);
+    }
+  });
+
+  // Policy arrows
+  const sym=['↑','↓','←','→'];
+  ctx.font=`${CELL*0.38}px sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle='rgba(255,255,255,0.5)';
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    if(OBS.has(K(r,c))||isG(r,c)||ps.has(K(r,c)))continue;
+    ctx.fillText(sym[pol[K(r,c)]],c*CELL+CELL/2,r*CELL+CELL/2);
+  }
+
+  ctx.fillStyle='#fff';ctx.font=`bold ${CELL*0.28}px sans-serif`;
+  ctx.fillText('Start',START.c*CELL+CELL/2,START.r*CELL+CELL/2);
+  ctx.fillText('Goal',GOAL.c*CELL+CELL/2,GOAL.r*CELL+CELL/2);
+
+  // Animated path head
+  if(rev.length>0){
+    const h=rev[rev.length-1];
+    ctx.strokeStyle='#fff';ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.arc(h.c*CELL+CELL/2,h.r*CELL+CELL/2,CELL*0.3,0,Math.PI*2);ctx.stroke();
+  }
+}
+
+function updateUI(route){
+  // Pills
+  document.getElementById('pillLeft').className='route-pill'+(route==='LEFT'?' active':'');
+  document.getElementById('pillCentre').className='route-pill'+(route==='CENTRE'?' active':'');
+  document.getElementById('pillRight').className='route-pill'+(route==='RIGHT'?' active':'');
+  // Explanation
+  document.getElementById('explanationText').innerHTML=getExplanation(route,rPen,rStep,rGoal);
+  document.getElementById('simStatus').textContent='Converged';
+}
+
+function runSim(){
+  clearTimeout(animTimer);
+  solve();
+  pathCells=trace();
+  animStep=0;
+  const route=routeOf(pathCells);
+  updateUI(route);
+  anim(route);
+}
+
+function anim(route){
+  clearTimeout(animTimer);
+  if(!running)return;
+  draw(pathCells.slice(0,animStep+1),route);
+  if(animStep<pathCells.length-1){
+    animStep++;
+    animTimer=setTimeout(()=>anim(route),90);
+  } else {
+    animTimer=setTimeout(()=>{animStep=0;if(running)anim(route);},2200);
+  }
+}
+
+let paused=false;
+document.getElementById('btnPause').addEventListener('click',()=>{
+  paused=!paused;running=!paused;
+  document.getElementById('btnPause').innerHTML=paused?'&#9654;':'&#9646;&#9646;';
+  document.getElementById('simStatus').textContent=paused?'Paused':'Running';
+  if(!paused)anim(routeOf(pathCells));else clearTimeout(animTimer);
+});
+document.getElementById('btnReset').addEventListener('click',()=>{
+  paused=false;running=true;
+  document.getElementById('btnPause').innerHTML='&#9646;&#9646;';
+  runSim();
+});
+
+let st=null;
+function su(){
+  rGoal=parseFloat(document.getElementById('sliderReward').value);
+  rPen=parseFloat(document.getElementById('sliderPenalty').value);
+  rStep=parseFloat(document.getElementById('sliderStep').value);
+  document.getElementById('valReward').textContent=rGoal;
+  document.getElementById('valPenalty').textContent=rPen;
+  document.getElementById('valStep').textContent=rStep.toFixed(1);
+  document.getElementById('simStatus').textContent='Re-solving...';
+  clearTimeout(animTimer);clearTimeout(st);
+  st=setTimeout(()=>{running=true;runSim();},300);
+}
+document.getElementById('sliderReward').addEventListener('input',su);
+document.getElementById('sliderPenalty').addEventListener('input',su);
+document.getElementById('sliderStep').addEventListener('input',su);
+
+runSim();
+</script>
+<script>
+(function(){
+  const logo=document.getElementById('site-logo');
+  const img=logo.querySelector('img');let n=0;
+  function err(){if(n<2){n++;setTimeout(()=>{img.src='https://signal.meltke.com/Logo_rectangle.svg';},1000*n);}else logo.classList.add('logo-failed');}
+  if(img.complete&&img.naturalHeight===0)err();
+  img.addEventListener('error',err);
+  img.addEventListener('load',()=>logo.classList.remove('logo-failed'));
+})();
+</script>
+<script>window.goatcounter={path:function(p){return location.host+p}}</script>
+<script data-goatcounter="https://meltke.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

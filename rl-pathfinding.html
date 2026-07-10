@@ -39,17 +39,13 @@
 <meta name="twitter:description" content="Interactive policy iteration simulation. Drag the sliders and watch the agent's route and reasoning change." >
 <meta name="twitter:image" content="https://signal.meltke.com/Frank_Meltke.png">
 <meta name="twitter:site" content="@frankmeltke">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://signal.meltke.com/rl-pathfinding.html","url":"https://signal.meltke.com/rl-pathfinding.html","name":"RL Pathfinding: How Reward Shapes Agent Behavior","isPartOf":{"@id":"https://signal.meltke.com/#website"},"author":{"@id":"https://meltke.com/#person"},"datePublished":"2026-06-10","dateModified":"2026-06-11"},{"@type":"Person","@id":"https://meltke.com/#person","name":"Frank Meltke","url":"https://meltke.com","sameAs":["https://www.wikidata.org/wiki/Q139680598","https://meltke.com","https://orcid.org/0009-0006-9001-0078","https://scholar.google.com/citations?user=Md3quCcAAAAJ","https://www.linkedin.com/in/frankmeltke","https://www.google.com/search?kgmid=/g/11rqtzq613"]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://signal.meltke.com/rl-pathfinding.html","url":"https://signal.meltke.com/rl-pathfinding.html","name":"RL Pathfinding: How Reward Shapes Agent Behavior","isPartOf":{"@id":"https://signal.meltke.com/#website"},"author":{"@id":"https://meltke.com/#person"},"datePublished":"2026-06-10","dateModified":"2026-07-10"},{"@type":"Person","@id":"https://meltke.com/#person","name":"Frank Meltke","url":"https://meltke.com","sameAs":["https://www.wikidata.org/wiki/Q139680598","https://meltke.com","https://orcid.org/0009-0006-9001-0078","https://scholar.google.com/citations?user=Md3quCcAAAAJ","https://www.linkedin.com/in/frankmeltke","https://www.google.com/search?kgmid=/g/11rqtzq613"]}]}</script>
 <style>
 :root{--primary-red:#C00000;--deep-charcoal:#404040;--warm-white:#F8F6F3;--warm-gray-light:#E5E2DD;--warm-gray-medium:#9A9590;--font-serif:'Cormorant Garamond',Georgia,serif;--font-sans:'Inter',system-ui,sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{font-family:var(--font-sans);background:var(--warm-white);color:var(--deep-charcoal);min-height:100vh;display:flex;flex-direction:column;}
 header{padding:32px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--warm-gray-light);}
-.logo-link{display:flex;align-items:center;gap:14px;text-decoration:none;}
-.logo-link img{height:36px;width:auto;}
-.logo-link.logo-failed img{display:none;}
-.logo-fallback{display:none;font-family:var(--font-serif);font-size:1.4rem;font-weight:600;color:var(--primary-red);letter-spacing:0.04em;}
-.logo-link.logo-failed .logo-fallback{display:block;}
+.logo-wordmark{font-family:var(--font-serif);font-size:1.4rem;font-weight:600;color:var(--primary-red);letter-spacing:0.04em;text-decoration:none;}
 .header-link{font-size:0.85rem;font-weight:500;color:var(--warm-gray-medium);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
 .header-link:hover{color:var(--primary-red);}
 main{flex:1;}
@@ -109,10 +105,7 @@ footer{padding:40px 48px;border-top:1px solid var(--warm-gray-light);display:fle
 </head>
 <body>
 <header>
-  <a href="https://signal.meltke.com/" class="logo-link" id="site-logo">
-    <img src="https://signal.meltke.com/Logo_rectangle.svg" alt="Frank Meltke" onerror="this.parentElement.classList.add('logo-failed');">
-    <span class="logo-fallback">Frank Meltke</span>
-  </a>
+  <a href="https://signal.meltke.com/" class="logo-wordmark">Frank Meltke</a>
   <a href="https://meltke.com/" class="header-link">meltke.com &rarr;</a>
 </header>
 <main>
@@ -408,16 +401,6 @@ document.getElementById('sliderPenalty').addEventListener('input',su);
 document.getElementById('sliderStep').addEventListener('input',su);
 
 runSim();
-</script>
-<script>
-(function(){
-  const logo=document.getElementById('site-logo');
-  const img=logo.querySelector('img');let n=0;
-  function err(){if(n<2){n++;setTimeout(()=>{img.src='https://signal.meltke.com/Logo_rectangle.svg';},1000*n);}else logo.classList.add('logo-failed');}
-  if(img.complete&&img.naturalHeight===0)err();
-  img.addEventListener('error',err);
-  img.addEventListener('load',()=>logo.classList.remove('logo-failed'));
-})();
 </script>
 <script>window.goatcounter={path:function(p){return location.host+p}}</script>
 <script data-goatcounter="https://meltke.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

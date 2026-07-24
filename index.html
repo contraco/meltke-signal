@@ -96,7 +96,7 @@
                 "name": "Signal: AI Governance & Agent Authorization | Frank Meltke",
                 "isPartOf": { "@id": "https://signal.meltke.com/#website" },
                 "mainEntity": { "@id": "https://meltke.com/#person" },
-                "dateModified": "2026-07-10"
+                "dateModified": "2026-07-24"
             }
         ]
     }
@@ -371,6 +371,7 @@
             <p>The financial services industry is currently building authorization frameworks for AI agents. The regulatory requirements are tightening. The frameworks are more complex than they appear from the outside.</p>
             <p>An agent is not just a user. An agent can act on behalf of a user, spawn sub-agents, chain authorizations, and execute transactions at speeds that make human oversight a fiction if the architecture is not designed carefully from the start. The naive approach treats agents like users with special permissions. The naive approach fails because it does not account for scope drift, revocation propagation, liability chains between agent hierarchies, or the audit trail requirements that regulators will enforce retroactively.</p>
             <p>What authorization actually requires: explicit scope binding at the moment of consent creation, time-bounded permissions with automatic expiration, revocation logic that propagates synchronously through agent chains rather than asynchronously, and an audit log that can reconstruct the exact authorization state for every decision the system ever made. None of this is technically hard in isolation. All of it requires engineering judgment about what matters before the system exists. After the system exists, the judgment has already been made. The only question is whether it was made deliberately or by accident.</p>
+            <p>There is a second reason the audit log matters, and it is not a compliance formality. German civil law places the burden on the party who deployed the agent to show what that agent was actually permitted to do. The wider the discretion granted, the narrower the grounds for later contesting what the agent committed to. An operator who cannot produce the mandate, its limits, and the state of the system at the moment of the transaction has no position to argue from. The architecture is the evidence. If it was not recorded at authorization time, it does not exist when it is needed.</p>
             <p>The difference between deliberate and accidental authorization architecture is not visible when things work. It is only visible when something goes wrong, when a regulator asks for evidence, or when an agent acts on a permission that should have been revoked three steps earlier in a chain that nobody drew on paper.</p>
         </section>
 

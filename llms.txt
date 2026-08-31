@@ -4,11 +4,11 @@
 
 Signal is a practitioner notes site by Frank Meltke, founder and CEO of contraco. The notes are written from direct experience building AI agent authorization systems and enterprise AI governance frameworks.
 
-## Notes
+## Themes
 
-- [The Verifier Gap](https://signal.meltke.com/) — Why AI trustworthiness is structural, not technical. The absence of a compiler-equivalent in unbounded domains.
-- [What Agent Authorization Actually Requires](https://signal.meltke.com/) — Scope binding, revocation propagation, audit trail architecture for AI agent hierarchies.
-- [Engineering Judgment Is the New Compiler](https://signal.meltke.com/) — The scarce resource in enterprise AI deployment when code is abundant.
+- The Verifier Gap: why AI trustworthiness is structural rather than technical, and what the absence of a compiler-equivalent means in unbounded domains.
+- Agent authorization: scope binding, revocation propagation, and audit trail architecture for AI agent hierarchies.
+- Engineering judgment: the scarce resource in enterprise AI deployment once code itself is abundant.
 
 ## About the Author
 
@@ -18,3 +18,8 @@ Frank Meltke is a German inventor, founder and CEO of contraco, guest lecturer a
 - [contraco](https://contraco.net)
 - [Agentic Commerce Research](https://agentic.contraco.net)
 - [LinkedIn](https://www.linkedin.com/in/frankmeltke)
+
+## Notes
+
+<!-- AUTO-PAGES:START -->
+<!-- AUTO-PAGES:END -->

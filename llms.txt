@@ -22,4 +22,6 @@ Frank Meltke is a German inventor, founder and CEO of contraco, guest lecturer a
 ## Notes
 
 <!-- AUTO-PAGES:START -->
+- [Signal: AI Governance & Agent Authorization](https://signal.meltke.com/)
+- [RL Pathfinding: Reward Structure Shapes Agent Strategy](https://signal.meltke.com/rl-pathfinding.html)
 <!-- AUTO-PAGES:END -->
